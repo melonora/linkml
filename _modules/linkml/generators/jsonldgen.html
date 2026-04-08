@@ -268,6 +268,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../generators/rust.html">Rust</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generators/sqltable.html">SQL DDL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generators/sqlalchemy.html">SQL Alchemy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/sqlvalidation.html">SQL Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generators/linkml.html">LinkML Generators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generators/prefixmap.html">Prefix Generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generators/sssom.html">SSSOM</a></li>
@@ -276,6 +277,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../generators/csv.html">CSV</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generators/yaml.html">Yaml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../generators/pandera.html">Pandera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../generators/dashboard.html">Generator Feature Dashboard</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../generators/common/index.html">Common</a><input aria-label="Toggle navigation of Common" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../generators/common/build.html">Build</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generators/common/lifecycle.html">Lifecycle</a></li>
@@ -297,6 +299,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../howtos/generate-ai-prompts.html">How to Generate AI prompts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../howtos/deprecating-elements.html">Deprecating elements while maintaining PURLs and other URIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../howtos/ontologies-as-values.html">Using ontology terms as values in data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../howtos/implements-instantiates-guide.html">Implements vs Instantiates vs Inheritance: A Best Practices Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../howtos/skip-logic.html">How to implement skip logic in LinkML</a></li>
 </ul>
 </li>
@@ -306,6 +309,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../get-involved/index.html">Get Involved</a><input aria-label="Toggle navigation of Get Involved" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../get-involved/Community-Meetings.html">Community Meetings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../get-involved/workshops-and-presentations.html">Workshops and Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../get-involved/office-hours.html">Monthly LinkML Office Hours</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../faq/index.html">FAQ</a><input aria-label="Toggle navigation of FAQ" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -358,6 +362,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../maintainers/organization.html">GitHub Organization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../maintainers/deprecation.html">Deprecations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../maintainers/code-of-conduct.html">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../maintainers/generator-governance.html">Generator and Validator Governance</a></li>
 </ul>
 </li>
 </ul>
@@ -456,6 +461,9 @@
 
     <span class="n">context</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Path to a JSONLD context file&quot;&quot;&quot;</span>
+
+    <span class="n">metamodel_context</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Override for metamodel context URI/path. When None, uses METAMODEL_CONTEXT_URI.&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">original_schema</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
@@ -591,7 +599,8 @@
             <span class="n">context_kwargs</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">add_prefixes</span> <span class="o">=</span> <span class="n">ContextGenerator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">original_schema</span><span class="p">,</span> <span class="o">**</span><span class="n">context_kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span>
             <span class="n">add_prefixes_json</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">add_prefixes</span><span class="p">)</span>
-            <span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">METAMODEL_CONTEXT_URI</span><span class="p">,</span> <span class="n">add_prefixes_json</span><span class="p">[</span><span class="s2">&quot;@context&quot;</span><span class="p">]]</span>
+            <span class="n">metamodel_ctx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">metamodel_context</span> <span class="ow">or</span> <span class="n">METAMODEL_CONTEXT_URI</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">metamodel_ctx</span><span class="p">,</span> <span class="n">add_prefixes_json</span><span class="p">[</span><span class="s2">&quot;@context&quot;</span><span class="p">]]</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>  <span class="c1"># Some of the older code doesn&#39;t do multiple contexts</span>
             <span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">context</span><span class="p">]</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>

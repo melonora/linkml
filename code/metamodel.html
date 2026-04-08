@@ -269,6 +269,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../generators/rust.html">Rust</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generators/sqltable.html">SQL DDL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generators/sqlalchemy.html">SQL Alchemy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generators/sqlvalidation.html">SQL Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generators/linkml.html">LinkML Generators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generators/prefixmap.html">Prefix Generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generators/sssom.html">SSSOM</a></li>
@@ -277,6 +278,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../generators/csv.html">CSV</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generators/yaml.html">Yaml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../generators/pandera.html">Pandera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../generators/dashboard.html">Generator Feature Dashboard</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../generators/common/index.html">Common</a><input aria-label="Toggle navigation of Common" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../generators/common/build.html">Build</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generators/common/lifecycle.html">Lifecycle</a></li>
@@ -298,6 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../howtos/generate-ai-prompts.html">How to Generate AI prompts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../howtos/deprecating-elements.html">Deprecating elements while maintaining PURLs and other URIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../howtos/ontologies-as-values.html">Using ontology terms as values in data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/implements-instantiates-guide.html">Implements vs Instantiates vs Inheritance: A Best Practices Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../howtos/skip-logic.html">How to implement skip logic in LinkML</a></li>
 </ul>
 </li>
@@ -307,6 +310,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../get-involved/index.html">Get Involved</a><input aria-label="Toggle navigation of Get Involved" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../get-involved/Community-Meetings.html">Community Meetings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-involved/workshops-and-presentations.html">Workshops and Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-involved/office-hours.html">Monthly LinkML Office Hours</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../faq/index.html">FAQ</a><input aria-label="Toggle navigation of FAQ" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -359,6 +363,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../maintainers/organization.html">GitHub Organization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../maintainers/deprecation.html">Deprecations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../maintainers/code-of-conduct.html">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../maintainers/generator-governance.html">Generator and Validator Governance</a></li>
 </ul>
 </li>
 </ul>
@@ -556,6 +561,11 @@
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linkml_runtime.linkml_model.meta.</span></span><span class="sig-name descname"><span class="pre">ClassDefinition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_if_missing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">JsonObj</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/linkml_runtime/linkml_model/meta.html#ClassDefinition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linkml_runtime.linkml_model.meta.ClassDefinition" title="Link to this definition">¶</a></dt>
 <dd><p>an element whose instances are complex objects that may have slot-value assignments</p>
 <dl class="py attribute">
+<dt class="sig sig-object py" id="linkml_runtime.linkml_model.meta.ClassDefinition.alias">
+<span class="sig-name descname"><span class="pre">alias</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#linkml_runtime.linkml_model.meta.ClassDefinition.alias" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="linkml_runtime.linkml_model.meta.ClassDefinition.all_of">
 <span class="sig-name descname"><span class="pre">all_of</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AnonymousClassExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AnonymousClassExpression</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#linkml_runtime.linkml_model.meta.ClassDefinition.all_of" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -623,6 +633,11 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="linkml_runtime.linkml_model.meta.ClassDefinition.exactly_one_of">
 <span class="sig-name descname"><span class="pre">exactly_one_of</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AnonymousClassExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">AnonymousClassExpression</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><a class="headerlink" href="#linkml_runtime.linkml_model.meta.ClassDefinition.exactly_one_of" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="linkml_runtime.linkml_model.meta.ClassDefinition.extra_slots">
+<span class="sig-name descname"><span class="pre">extra_slots</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ExtraSlotsExpression</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#linkml_runtime.linkml_model.meta.ClassDefinition.extra_slots" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">

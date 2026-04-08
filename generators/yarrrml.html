@@ -269,6 +269,7 @@
 <li class="toctree-l2"><a class="reference internal" href="rust.html">Rust</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sqltable.html">SQL DDL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sqlalchemy.html">SQL Alchemy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlvalidation.html">SQL Validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linkml.html">LinkML Generators</a></li>
 <li class="toctree-l2"><a class="reference internal" href="prefixmap.html">Prefix Generator</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sssom.html">SSSOM</a></li>
@@ -277,6 +278,7 @@
 <li class="toctree-l2"><a class="reference internal" href="csv.html">CSV</a></li>
 <li class="toctree-l2"><a class="reference internal" href="yaml.html">Yaml</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pandera.html">Pandera</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dashboard.html">Generator Feature Dashboard</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="common/index.html">Common</a><input aria-label="Toggle navigation of Common" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="common/build.html">Build</a></li>
 <li class="toctree-l3"><a class="reference internal" href="common/lifecycle.html">Lifecycle</a></li>
@@ -298,6 +300,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../howtos/generate-ai-prompts.html">How to Generate AI prompts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../howtos/deprecating-elements.html">Deprecating elements while maintaining PURLs and other URIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../howtos/ontologies-as-values.html">Using ontology terms as values in data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../howtos/implements-instantiates-guide.html">Implements vs Instantiates vs Inheritance: A Best Practices Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../howtos/skip-logic.html">How to implement skip logic in LinkML</a></li>
 </ul>
 </li>
@@ -307,6 +310,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../get-involved/index.html">Get Involved</a><input aria-label="Toggle navigation of Get Involved" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../get-involved/Community-Meetings.html">Community Meetings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../get-involved/workshops-and-presentations.html">Workshops and Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../get-involved/office-hours.html">Monthly LinkML Office Hours</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../faq/index.html">FAQ</a><input aria-label="Toggle navigation of FAQ" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
@@ -359,6 +363,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../maintainers/organization.html">GitHub Organization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../maintainers/deprecation.html">Deprecations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../maintainers/code-of-conduct.html">Code of Conduct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../maintainers/generator-governance.html">Generator and Validator Governance</a></li>
 </ul>
 </li>
 </ul>
@@ -459,6 +464,14 @@
 <span class="w">  </span><span class="nt">o</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(employer)</span>
 <span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iri</span>
+</pre></div>
+</div>
+</li>
+<li><p>Multivalued object slots are emitted as lists of IRIs:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">p</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ex:friends</span>
+<span class="w">  </span><span class="nt">o</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$(friends[*])</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">iri</span>
 </pre></div>
 </div>
 </li>
@@ -666,7 +679,13 @@ gen-yarrrml<span class="w"> </span>path/to/schema.yaml<span class="w"> </span>--
 <li><p>JSON-first by default</p></li>
 <li><p>One source per mapping</p></li>
 <li><p>Classes without an identifier are <strong>assigned a fallback subject</strong>: <code class="docutils literal notranslate"><span class="pre">ex:&lt;Class&gt;/$(subject_id)</span></code></p></li>
-<li><p>Object slots: <code class="docutils literal notranslate"><span class="pre">inlined:</span> <span class="pre">false</span></code> → IRI; <code class="docutils literal notranslate"><span class="pre">inlined:</span> <span class="pre">true</span></code> → included as separate mapping</p></li>
+<li><p>Object slots:
+- <code class="docutils literal notranslate"><span class="pre">inlined:</span> <span class="pre">false</span></code> → emitted as IRIs
+- <code class="docutils literal notranslate"><span class="pre">inlined:</span> <span class="pre">true</span></code> → emitted using YARRRML <code class="docutils literal notranslate"><span class="pre">mapping</span></code> + <code class="docutils literal notranslate"><span class="pre">condition</span></code> (join) pattern</p></li>
+<li><p>Inline classes require an identifier (or key) to support join-based linking</p></li>
+<li><p>An inline class can only be used in a single owning class.
+Multiple inline usages of the same class are not supported,
+as each mapping can define only one source/iterator.</p></li>
 <li><p>Iterators not derived from JSON Schema</p></li>
 <li><p>No per-slot JSONPath/CSV expressions or functions</p></li>
 <li><p>CSV/TSV supported via <code class="docutils literal notranslate"><span class="pre">--source</span></code>; delimiter/custom CSVW options are not yet exposed</p></li>
